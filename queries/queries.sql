@@ -17,9 +17,9 @@ SELECT nombre,
 FROM producto;
 
 -- 5. Lista el nombre de los productos, el precio en euros y el precio en dólares (1€ = 1.1$, redondeado a 2 decimales).
-SELECT nombre                        AS "nombre del producto",
+SELECT nombre                        AS "nom del producte",
        precio                        AS euros,
-       ROUND(precio * 1.1, 2)        AS dólares
+       ROUND(precio * 1.1, 2)        AS dòlars
 FROM producto;
 
 -- 6. Lista los nombres y los precios de todos los productos, convirtiendo los nombres a mayúscula.
@@ -42,7 +42,7 @@ FROM producto;
 
 -- 10. Lista los nombres y precios de todos los productos, truncando el valor del precio sin cifras decimales.
 SELECT nombre,
-       TRUNCATE(precio, 0) AS precio
+       TRUNCATE(precio, 0) AS "precio truncado"
 FROM producto;
 
 -- 11. Muestra una lista con los códigos de los fabricantes que aparecen en la tabla producto, incluyendo posibles repeticiones.
@@ -96,23 +96,23 @@ FROM producto
 WHERE codigo_fabricante = 2;
 
 -- 21. Devuelve una lista con el nombre del producto, precio y nombre del fabricante de todos los productos.
-SELECT p.nombre, p.precio, f.nombre AS nombre_fabricante
+SELECT p.nombre, p.precio, f.nombre AS "nombre del fabricante"
 FROM producto p
          JOIN fabricante f ON p.codigo_fabricante = f.codigo;
 
 -- 22. Lista todos los productos con nombre, precio y nombre del fabricante ordenados alfabéticamente.
-SELECT p.nombre, p.precio, f.nombre AS nombre_fabricante
+SELECT p.nombre, p.precio, f.nombre AS "nombre del fabricante"
 FROM producto p
          JOIN fabricante f ON p.codigo_fabricante = f.codigo
 ORDER BY p.nombre ASC;
 
 -- 23. Devuelve una lista con el código del producto, nombre del producto, código del fabricante y nombre del fabricante.
-SELECT p.codigo, p.nombre, f.codigo AS codigo_fabricante, f.nombre AS nombre_fabricante
+SELECT p.codigo, p.nombre, f.codigo AS "codigo fabricante", f.nombre AS "nombre fabricante"
 FROM producto p
          JOIN fabricante f ON p.codigo_fabricante = f.codigo;
 
 -- 24. Devuelve el nombre, el precio y el nombre del fabricante del producto más barato.
-SELECT p.nombre, p.precio, f.nombre AS fabricante
+SELECT p.nombre, p.precio, f.nombre AS fabricant
 FROM producto p
          JOIN fabricante f ON p.codigo_fabricante = f.codigo
 ORDER BY p.precio ASC
@@ -188,7 +188,7 @@ FROM fabricante f
 WHERE p.codigo IS NULL;
 
 -- 36. Devuelve todos los productos del fabricante Lenovo. Sin usar INNER JOIN.
-SELECT p.nombre, p.precio
+SELECT *
 FROM producto p, fabricante f
 WHERE p.codigo_fabricante = f.codigo
   AND f.nombre = 'Lenovo';
@@ -220,7 +220,7 @@ ORDER BY p.precio ASC
 LIMIT 1;
 
 -- 40. Devuelve todos los productos con precio mayor o igual al producto más caro del fabricante Lenovo.
-SELECT p.nombre, p.precio
+SELECT *
 FROM producto p
 WHERE p.precio >= (
     SELECT MAX(p2.precio)
@@ -230,7 +230,7 @@ WHERE p.precio >= (
 );
 
 -- 41. Lista todos los productos del fabricante Asus que tienen un precio superior al precio medio de todos sus productos.
-SELECT p.nombre, p.precio
+SELECT *
 FROM producto p
          JOIN fabricante f ON p.codigo_fabricante = f.codigo
 WHERE f.nombre = 'Asus'
