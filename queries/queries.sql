@@ -104,7 +104,7 @@ FROM producto p
 SELECT p.nombre, p.precio, f.nombre AS "nombre del fabricante"
 FROM producto p
          JOIN fabricante f ON p.codigo_fabricante = f.codigo
-ORDER BY p.nombre ASC;
+ORDER BY f.nombre ASC, p.nombre ASC;
 
 -- 23. Devuelve una lista con el código del producto, nombre del producto, código del fabricante y nombre del fabricante.
 SELECT p.codigo, p.nombre, f.codigo AS "codigo fabricante", f.nombre AS "nombre fabricante"
@@ -172,7 +172,7 @@ WHERE p.precio >= 180
 ORDER BY p.precio DESC, p.nombre ASC;
 
 -- 33. Devuelve un listado con el código y el nombre del fabricante, solo de aquellos que tienen productos asociados.
-SELECT DISTINCT f.codigo, f.nombre AS fabricante
+SELECT DISTINCT f.codigo, f.nombre
 FROM fabricante f
          JOIN producto p ON f.codigo = p.codigo_fabricante;
 
@@ -188,7 +188,7 @@ FROM fabricante f
 WHERE p.codigo IS NULL;
 
 -- 36. Devuelve todos los productos del fabricante Lenovo. Sin usar INNER JOIN.
-SELECT *
+SELECT p.*
 FROM producto p, fabricante f
 WHERE p.codigo_fabricante = f.codigo
   AND f.nombre = 'Lenovo';
@@ -230,7 +230,7 @@ WHERE p.precio >= (
 );
 
 -- 41. Lista todos los productos del fabricante Asus que tienen un precio superior al precio medio de todos sus productos.
-SELECT *
+SELECT p.*
 FROM producto p
          JOIN fabricante f ON p.codigo_fabricante = f.codigo
 WHERE f.nombre = 'Asus'
