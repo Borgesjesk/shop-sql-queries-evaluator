@@ -105,7 +105,7 @@ FROM producto p
 SELECT p.nombre, p.precio, f.nombre AS "nombre del fabricante"
 FROM producto p
          JOIN fabricante f ON p.codigo_fabricante = f.codigo
-ORDER BY p.nombre ASC, f.nombre DESC;
+ORDER BY f.nombre ASC;
 
 -- 23. Devuelve una lista con el código del producto, nombre del producto, código del fabricante y nombre del fabricante.
 SELECT p.codigo, p.nombre, f.codigo AS "codigo fabricante", f.nombre AS "nombre fabricante"
