@@ -23,7 +23,7 @@ FROM producto;
 SELECT
     nombre AS 'nom del producte',
     precio AS euros,
-    ROUND(precio * 1.1, 2) AS dòlars
+    ROUND(precio * 1.1, 2) AS dolars
 FROM producto;
 
 -- 6. Llista els noms (nombre) i els preus de tots els productes de la taula producto, convertint els noms a majúscula.
@@ -114,13 +114,17 @@ JOIN fabricante f ON p.codigo_fabricante = f.codigo;
 SELECT p.nombre, p.precio, f.nombre AS fabricante
 FROM producto p
 JOIN fabricante f ON p.codigo_fabricante = f.codigo
-WHERE p.precio = (SELECT MIN(precio) FROM producto);
+WHERE p.precio = (
+    SELECT MIN(precio) FROM producto
+);
 
 -- 25. Retorna el nom del producte, el preu i el nom del seu fabricant (fabricante), del producte més car.
 SELECT p.nombre, p.precio, f.nombre AS fabricante
 FROM producto p
 JOIN fabricante f ON p.codigo_fabricante = f.codigo
-WHERE p.precio = (SELECT MAX(precio) FROM producto);
+WHERE p.precio = (
+    SELECT MAX(precio) FROM producto
+);
 
 -- 26. Retorna una llista amb nom i preu de tots els productes del fabricant Lenovo.
 SELECT p.nombre, p.precio
