@@ -151,7 +151,11 @@ WHERE f.nombre = 'Asus' OR f.nombre = 'Hewlett-Packard' OR f.nombre = 'Seagate';
 SELECT p.nombre, p.precio, f.nombre AS fabricante
 FROM producto p
 JOIN fabricante f ON p.codigo_fabricante = f.codigo
-WHERE f.nombre IN ('Asus', 'Hewlett-Packard', 'Seagate');
+WHERE EXISTS (
+    SELECT 1
+    FROM (SELECT 'Asus' AS n UNION SELECT 'Hewlett-Packard' UNION SELECT 'Seagate') AS temp
+    WHERE temp.n = f.nombre
+);
 
 -- 30. Retorna un llistat amb el nom, el preu i el nom del fabricant (fabricante) dels productes, on el nom del fabricant acabi en la lletra 'e'.
 SELECT p.nombre, p.precio, f.nombre AS fabricante
