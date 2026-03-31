@@ -13,7 +13,8 @@ SELECT nombre, precio
 FROM producto;
 
 -- 3. Llista totes les columnes de la taula producto.
-SELECT * FROM producto;
+SELECT codigo, nombre, precio, codigo_fabricante
+FROM producto;
 
 -- 4. Llista el nom dels productes, el preu en euros (precio_eur) i el preu en dòlars estatunidencs (precio_usd) amb un tipus de canvi de 1 € = 1 $.
 SELECT nombre, precio AS precio_eur, precio AS precio_usd
@@ -70,11 +71,13 @@ FROM producto
 ORDER BY nombre ASC, precio DESC;
 
 -- 16. Retorna una llista amb les 5 primeres files de la taula fabricante.
-SELECT * FROM fabricante
+SELECT codigo, nombre
+FROM fabricante
 LIMIT 5;
 
 -- 17. Retorna una llista amb 2 files a partir de la quarta fila de la taula fabricante. La quarta fila també s'ha d'incloure en la resposta.
-SELECT * FROM fabricante
+SELECT codigo, nombre
+FROM fabricante
 LIMIT 2 OFFSET 3;
 
 -- 18. Llista el nom i el preu del producte més barat. (Utilitza solament les clàusules ORDER BY i LIMIT).
@@ -186,11 +189,13 @@ LEFT JOIN producto p ON f.codigo = p.codigo_fabricante
 WHERE p.codigo_fabricante IS NULL;
 
 -- 36. Retorna tots els productes del fabricant Lenovo. (Sense utilitzar INNER JOIN).
-SELECT * FROM producto
+SELECT codigo, nombre, precio, codigo_fabricante
+FROM producto
 WHERE codigo_fabricante = (SELECT codigo FROM fabricante WHERE nombre = 'Lenovo');
 
 -- 37. Retorna totes les dades dels productes que tenen el mateix preu que el producte més car del fabricant Lenovo. (Sense usar INNER JOIN).
-SELECT * FROM producto
+SELECT codigo, nombre, precio, codigo_fabricante
+FROM producto
 WHERE precio = (
     SELECT MAX(precio)
     FROM producto
@@ -214,7 +219,8 @@ ORDER BY p.precio ASC
 LIMIT 1;
 
 -- 40. Retorna tots els productes de la base de dades que tenen un preu major o igual al producte més car del fabricant Lenovo.
-SELECT * FROM producto
+SELECT codigo, nombre, precio, codigo_fabricante
+FROM producto
 WHERE precio >= (
     SELECT MAX(p.precio)
     FROM producto p
